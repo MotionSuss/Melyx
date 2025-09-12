@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MELYX - Premium Business Tools</title>
-    <link rel="icon" href="melyx-logo.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,381 +14,327 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000 100%);
             color: #ffffff;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 140vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
-            text-align: center;
+            padding: 2rem;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-            padding-top: 17vh;
         }
 
-        .hero::before {
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            animation: slideDown 1s ease-out;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-right: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            letter-spacing: -2px;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #cccccc;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .premium-button {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .premium-button:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+
+        .premium-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="0.5" fill="rgba(255,215,0,0.1)"/><circle cx="75" cy="75" r="0.3" fill="rgba(255,215,0,0.08)"/><circle cx="50" cy="10" r="0.4" fill="rgba(255,215,0,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: inherit;
+            z-index: -2;
+            transition: all 0.4s ease;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+        .premium-button::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 18px;
+            z-index: -1;
         }
 
-        .logo-title-container {
+        .premium-button:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+        }
+
+        .premium-button:hover::before {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
+        }
+
+        .premium-button:hover .button-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .button-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .button-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
         }
 
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-right: 2rem;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid #ffd700;
+        .button-icon::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background: currentColor;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
         }
 
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+        .resume-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'/%3E%3C/svg%3E");
         }
 
-        .main-title {
-            font-size: 5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
-            background-size: 200% 200%;
+        .invoice-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z'/%3E%3C/svg%3E");
+        }
+
+        .button-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: goldShimmer 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
-            letter-spacing: 0.1em;
         }
 
-        @keyframes goldShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .button-description {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #aaaaaa;
+            line-height: 1.5;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            position: relative;
-            z-index: 2;
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .navigation-buttons {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .nav-button {
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            border: 2px solid #ffd700;
-            color: #ffffff;
-            padding: 1.5rem 2.5rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-            min-width: 280px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-button:hover::before {
-            left: 100%;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-            border-color: #ffed4e;
-        }
-
-        .nav-button h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
-            color: #ffd700;
-        }
-
-        .nav-button p {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0;
-        }
-
-        /* Embedded Sections */
-        .embedded-section {
-            min-height: 400vh;
-            padding: 2rem 0;
-            border-top: 2px solid rgba(255, 215, 0, 0.3);
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: #ffd700;
-            margin-bottom: 1rem;
-        }
-
-        .section-header p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-        }
-
-        .iframe-container {
-            width: 100%;
-            height: 320vh;
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            background: #ffffff;
-        }
-
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .back-to-top {
+        .floating-particles {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            color: #000;
-            border: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #FFD700;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-            z-index: 1000;
+            opacity: 0.6;
+            animation: float 15s infinite ease-in-out;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-100px) translateX(100px);
+            }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .logo-title-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .logo {
-                margin-right: 0;
-                margin-bottom: 1rem;
-                width: 80px;
-                height: 80px;
-            }
-
-            .logo::before {
-                font-size: 2rem;
-            }
-
-            .main-title {
+            .title {
                 font-size: 3rem;
             }
-
-            .navigation-buttons {
-                flex-direction: column;
-                align-items: center;
+            
+            .logo {
+                width: 60px;
+                height: 60px;
+                margin-right: 1rem;
             }
-
-            .nav-button {
-                min-width: 250px;
+            
+            .description {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
             }
-
-            .section-header h2 {
-                font-size: 2rem;
+            
+            .buttons-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+            
+            .premium-button {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="logo-title-container">
-                <div class="logo">
-                    <img src="melyx-logo.png" alt="MELYX Logo">
+    <div class="bg-pattern"></div>
+    
+    <div class="floating-particles">
+        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <img src="melyx-logo.png" alt="MELYX Logo" class="logo">
+            <h1 class="title">MELYX</h1>
+        </div>
+
+        <p class="description">Premium Business Tools for Modern Professionals</p>
+
+        <div class="buttons-container">
+            <a href="Melyx- Quick Resume/index.html" class="premium-button">
+                <div class="button-content">
+                    <div class="button-icon resume-icon"></div>
+                    <h3 class="button-title">Quick Resume</h3>
+                    <p class="button-description">Build a stunning portfolio in seconds.</p>
                 </div>
-                <h1 class="main-title">MELYX</h1>
-            </div>
-            <p class="subtitle">Premium Business Tools for Modern Professionals</p>
-            <div class="navigation-buttons">
-                <a href="#quick-resume" class="nav-button">
-                    <h3>Quick Resume</h3>
-                    <p>Build a stunning portfolio in minutes.</p>
-                </a>
-                <a href="#invoice-generator" class="nav-button">
-                    <h3>Invoice Generator</h3>
-                    <p>Create professional invoices in seconds.</p>
-                </a>
-            </div>
+            </a>
+
+            <a href="Melyx- Invoice generator/index.html" class="premium-button">
+                <div class="button-content">
+                    <div class="button-icon invoice-icon"></div>
+                    <h3 class="button-title">Invoice Generator</h3>
+                    <p class="button-description">Create professional invoices in seconds.</p>
+                </div>
+            </a>
         </div>
-    </section>
-
-    <!-- Quick Resume Section -->
-<section class="embedded-section" id="quick-resume">
-  <div class="container">
-    <div class="section-header">
-      <h2>Quick Resume Builder</h2>
-      <p>Create stunning portfolios and resumes with our intuitive builder</p>
     </div>
-    <div class="iframe-container">
-      <iframe src="Melyx- Quick Resume/index.html" 
-              title="Quick Resume Builder"
-              loading="lazy"></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- Invoice Generator Section -->
-<section class="embedded-section" id="invoice-generator">
-  <div class="container">
-    <div class="section-header">
-      <h2>Invoice Generator</h2>
-      <p>Generate professional invoices quickly and efficiently</p>
-    </div>
-    <div class="iframe-container">
-      <iframe src="Melyx- Invoice generator/index.html" 
-              title="Invoice Generator"
-              loading="lazy"></iframe>
-    </div>
-  </div>
-</section>
-
-
-    <!-- Copyright Footer -->
-    <footer style="text-align: center; padding: 2rem 0; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem; border-top: 1px solid rgba(255, 215, 0, 0.2);">
-        <div class="container">
-            © Melyx 2025
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" onclick="scrollToTop()" title="Back to top">↑</button>
-
-    <script>
-        // Smooth scroll functionality
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Back to top functionality
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Show/hide back to top button
-        window.addEventListener('scroll', function() {
-            const backToTop = document.querySelector('.back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        });
-
-        // Add loading animation for iframes
-        document.addEventListener('DOMContentLoaded', function() {
-            const iframes = document.querySelectorAll('iframe');
-            iframes.forEach(iframe => {
-                iframe.addEventListener('load', function() {
-                    this.style.opacity = '1';
-                });
-            });
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-    </script>
 </body>
 </html>
